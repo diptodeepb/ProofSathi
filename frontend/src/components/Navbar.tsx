@@ -23,27 +23,30 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800">
-      <div className="max-w-xl mx-auto px-4 h-18 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-slate-900/98 backdrop-blur-md border-b-2 border-slate-800">
+      <div className="max-w-xl mx-auto px-4 h-20 flex items-center justify-between">
         {/* Brand */}
         <Link
           to="/"
-          className="flex items-center gap-3.5 focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-xl p-1"
+          className="flex items-center gap-3 focus-visible:ring-3 focus-visible:ring-sky-400 rounded-2xl p-1.5 active:opacity-80 transition-opacity"
+          aria-label="ProofSathi Home"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center shadow-md">
-            <FileCheck className="w-6 h-6 text-white" />
+          <div className="w-12 h-12 rounded-2xl bg-indigo-600 border-2 border-indigo-400/40 flex items-center justify-center shadow-md shrink-0">
+            <FileCheck className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-white leading-none">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
               {t("appName")}
             </h1>
-            <span className="text-xs text-sky-400 font-medium">ProofSathi</span>
+            <span className="text-xs text-sky-400 font-semibold tracking-wide">
+              ProofSathi
+            </span>
           </div>
         </Link>
 
-        {/* Language Switcher Bar */}
+        {/* Accessible Language Switcher */}
         <div
-          className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800"
+          className="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-2xl border-2 border-slate-800"
           role="group"
           aria-label="Language selection"
         >
@@ -53,43 +56,47 @@ export const Navbar: React.FC = () => {
               { code: "hi", label: "हि" },
               { code: "bn", label: "বাং" },
             ] as const
-          ).map((item) => (
-            <button
-              key={item.code}
-              onClick={() => setLanguage(item.code as AppLanguage)}
-              className={`tap-target px-3 py-1.5 text-sm font-semibold rounded-lg transition-all ${
-                language === item.code
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-              aria-pressed={language === item.code}
-            >
-              {item.label}
-            </button>
-          ))}
+          ).map((item) => {
+            const isActive = language === item.code;
+            return (
+              <button
+                key={item.code}
+                type="button"
+                onClick={() => setLanguage(item.code as AppLanguage)}
+                className={`tap-target px-3.5 py-1.5 text-base font-bold rounded-xl transition-all ${
+                  isActive
+                    ? "bg-indigo-600 text-white shadow-md border border-indigo-400/60"
+                    : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                }`}
+                aria-pressed={isActive}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Mobile Bottom Navigation Bar */}
+      {/* Mobile Bottom Navigation Bar (min 56px height, high-contrast labels for seniors) */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900 border-t border-slate-800 py-1.5 md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/98 backdrop-blur-md border-t-2 border-slate-800 py-2 md:hidden"
         aria-label="Primary navigation"
       >
-        <div className="max-w-xl mx-auto grid grid-cols-3 gap-1 px-3">
+        <div className="max-w-xl mx-auto grid grid-cols-3 gap-2 px-3">
           {navLinks.map((item) => {
             const isActive = location.pathname === item.to;
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`tap-target flex-col gap-1 py-1 px-2 rounded-xl transition-colors ${
+                className={`tap-target flex-col gap-1 py-1.5 px-2 rounded-2xl transition-colors ${
                   isActive
-                    ? "text-sky-400 font-bold bg-slate-800/80"
-                    : "text-slate-400 hover:text-slate-200 font-medium"
+                    ? "text-sky-300 font-extrabold bg-slate-800 border-2 border-sky-500/50"
+                    : "text-slate-300 hover:text-white font-semibold"
                 }`}
               >
-                {item.icon}
-                <span className="text-xs">{item.label}</span>
+                <span className="shrink-0">{item.icon}</span>
+                <span className="text-xs sm:text-sm font-bold tracking-tight">{item.label}</span>
               </Link>
             );
           })}

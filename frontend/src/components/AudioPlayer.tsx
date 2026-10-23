@@ -86,72 +86,80 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ textToSpeak }) => {
     }
   };
 
+  const languageDisplayName =
+    language === "hi" ? "हिंदी" : language === "bn" ? "বাংলা" : "English";
+
   return (
-    <div className="bg-slate-800/80 border-2 border-indigo-500/40 rounded-2xl p-4 shadow-md">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-indigo-600/30 text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-500/30">
-            <Volume2 className="w-6 h-6" />
+    <div className="bg-slate-900 border-2 border-amber-500/50 rounded-3xl p-5 shadow-xl space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border-2 border-amber-500/40 flex items-center justify-center shrink-0 shadow-inner">
+            <Volume2 className="w-7 h-7" />
           </div>
           <div>
-            <span className="block text-lg font-bold text-white flex items-center gap-2">
-              {isPlaying ? t("playing") : t("listen")}
+            <div className="flex items-center gap-2">
+              <span className="text-lg sm:text-xl font-extrabold text-white">
+                {isPlaying ? t("playing") : t("listen")}
+              </span>
               {isPlaying && (
-                <span className="flex items-end gap-1 h-5 px-1 pb-0.5">
-                  <span className="w-1 bg-sky-400 rounded-full animate-soundwave-1" />
-                  <span className="w-1 bg-indigo-400 rounded-full animate-soundwave-2" />
-                  <span className="w-1 bg-sky-300 rounded-full animate-soundwave-3" />
-                  <span className="w-1 bg-indigo-300 rounded-full animate-soundwave-4" />
+                <span className="flex items-end gap-1 h-5 px-1.5 pb-0.5" aria-hidden="true">
+                  <span className="w-1.5 bg-amber-400 rounded-full animate-soundwave-1" />
+                  <span className="w-1.5 bg-amber-300 rounded-full animate-soundwave-2" />
+                  <span className="w-1.5 bg-amber-400 rounded-full animate-soundwave-3" />
+                  <span className="w-1.5 bg-amber-300 rounded-full animate-soundwave-4" />
                 </span>
               )}
-            </span>
-            <span className="block text-xs text-slate-400">
-              Spoken explanation in {language.toUpperCase()}
+            </div>
+            <span className="block text-sm text-slate-300 font-medium">
+              Spoken explanation in <strong className="text-amber-300">{languageDisplayName}</strong>
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {!isPlaying ? (
             <button
+              type="button"
               onClick={handlePlay}
               disabled={isLoading}
-              className="tap-target px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-semibold rounded-xl flex items-center gap-2 shadow-sm transition-all"
-              aria-label={t("listen")}
+              className="tap-target px-6 py-3 bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-base sm:text-lg rounded-2xl flex items-center gap-2.5 shadow-lg border-2 border-amber-300/60 transition-all cursor-pointer disabled:opacity-50"
+              aria-label={`${t("listen")} in ${languageDisplayName}`}
             >
               {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-6 h-6 animate-spin text-slate-950" />
               ) : (
-                <Volume2 className="w-5 h-5" />
+                <Volume2 className="w-6 h-6 text-slate-950" />
               )}
               <span>{t("listen")}</span>
             </button>
           ) : (
-            <>
+            <div className="flex items-center gap-2">
               <button
+                type="button"
                 onClick={handlePause}
-                className="tap-target px-4 py-2 bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-medium rounded-xl flex items-center gap-1.5 transition-all"
+                className="tap-target px-5 py-2.5 bg-slate-800 hover:bg-slate-700 active:scale-95 text-white font-bold text-base rounded-2xl border-2 border-slate-600 flex items-center gap-2 transition-all cursor-pointer"
                 aria-label={t("pause")}
               >
-                <Pause className="w-5 h-5" />
+                <Pause className="w-5 h-5 text-amber-300" />
                 <span>{t("pause")}</span>
               </button>
               <button
+                type="button"
                 onClick={handleStop}
-                className="tap-target px-4 py-2 bg-rose-700/80 hover:bg-rose-600 active:scale-95 text-white font-medium rounded-xl flex items-center gap-1.5 transition-all"
+                className="tap-target px-5 py-2.5 bg-rose-900/80 hover:bg-rose-800 active:scale-95 text-white font-bold text-base rounded-2xl border-2 border-rose-600/70 flex items-center gap-2 transition-all cursor-pointer"
                 aria-label={t("stopAudio")}
               >
-                <Square className="w-4 h-4 fill-current" />
+                <Square className="w-4 h-4 fill-current text-rose-300" />
                 <span>{t("stopAudio")}</span>
               </button>
-            </>
+            </div>
           )}
         </div>
       </div>
 
       {error && (
-        <div className="mt-3 flex items-center gap-2 text-amber-300 bg-amber-950/40 border border-amber-800/50 p-2.5 rounded-xl text-sm">
-          <AlertCircle className="w-5 h-5 shrink-0" />
+        <div className="p-3 bg-amber-950/70 border-2 border-amber-700/80 rounded-2xl text-sm font-medium text-amber-200 flex items-center gap-2.5">
+          <AlertCircle className="w-5 h-5 shrink-0 text-amber-400" />
           <span>{error}</span>
         </div>
       )}

@@ -49,48 +49,52 @@ export const HistoryPage: React.FC = () => {
     <div className="max-w-xl mx-auto px-4 py-6 space-y-6">
       {/* Title */}
       <div className="space-y-1">
-        <h2 className="text-3xl font-extrabold text-white flex items-center gap-2.5">
+        <h2 className="text-3xl font-extrabold text-white flex items-center gap-3">
           <History className="w-8 h-8 text-sky-400" />
-          {t("history")}
+          <span>{t("history")}</span>
         </h2>
-        <p className="text-sm text-slate-400">
+        <p className="text-base text-slate-300 font-medium">
           Analysis results saved on this phone
         </p>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex gap-2 p-1.5 bg-slate-900 border border-slate-800 rounded-2xl" role="tablist">
+      {/* Filter Tabs (Elderly friendly large buttons) */}
+      <div className="flex gap-2 p-1.5 bg-slate-900 border-2 border-slate-800 rounded-2xl shadow-md" role="tablist">
         {(
           [
             { id: "all", label: t("filterAll") },
             { id: "bill", label: t("filterBills") },
             { id: "document", label: t("filterDocuments") },
           ] as const
-        ).map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setFilter(tab.id)}
-            className={`tap-target flex-1 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
-              filter === tab.id
-                ? "bg-indigo-600 text-white shadow-sm"
-                : "text-slate-400 hover:text-slate-200"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+        ).map((tab) => {
+          const isActive = filter === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setFilter(tab.id)}
+              className={`tap-target flex-1 py-3 rounded-xl text-base font-bold transition-all cursor-pointer ${
+                isActive
+                  ? "bg-indigo-600 text-white shadow-md border-2 border-indigo-400/50"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Document List */}
       {isLoading ? (
-        <div className="py-16 text-center text-slate-500">
-          <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="text-sm">Loading records...</p>
+        <div className="py-16 text-center text-slate-300">
+          <div className="w-10 h-10 border-3 border-indigo-400 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-base font-bold text-white">Loading records...</p>
         </div>
       ) : items.length === 0 ? (
-        <div className="p-8 text-center bg-slate-900/50 border border-slate-800 rounded-3xl space-y-4">
-          <Clock className="w-12 h-12 text-slate-600 mx-auto" />
-          <p className="text-sm text-slate-400 max-w-xs mx-auto leading-relaxed">
+        <div className="p-8 text-center bg-slate-900 border-2 border-slate-800 rounded-3xl space-y-4 shadow-xl">
+          <Clock className="w-14 h-14 text-slate-500 mx-auto" />
+          <p className="text-base text-slate-300 max-w-xs mx-auto leading-relaxed font-medium">
             {t("noRecords")}
           </p>
           <BigButton variant="primary" size="md" onClick={() => navigate("/")}>
@@ -98,46 +102,53 @@ export const HistoryPage: React.FC = () => {
           </BigButton>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {items.map((item) => (
             <div
               key={item.id}
-              className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-3"
+              className="p-4.5 rounded-2xl bg-slate-900 border-2 border-slate-800 hover:border-slate-600 transition-all flex items-center justify-between gap-3.5 shadow-md"
             >
               <div
                 onClick={() =>
                   navigate(item.workflow === "bill" ? `/billsaathi/${item.id}` : `/proofpath/${item.id}`)
                 }
-                className="flex items-start gap-3.5 min-w-0 flex-1 cursor-pointer"
+                className="flex items-start gap-4 min-w-0 flex-1 cursor-pointer"
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 border ${
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 mt-0.5 border-2 ${
                     item.workflow === "bill"
-                      ? "bg-indigo-950/80 text-indigo-400 border-indigo-800/60"
-                      : "bg-sky-950/80 text-sky-400 border-sky-800/60"
+                      ? "bg-indigo-950 text-indigo-300 border-indigo-700/80"
+                      : "bg-sky-950 text-sky-300 border-sky-700/80"
                   }`}
                 >
-                  {item.workflow === "bill" ? <Receipt className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
+                  {item.workflow === "bill" ? <Receipt className="w-6 h-6" /> : <FileText className="w-6 h-6" />}
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <span className="block text-xs font-black uppercase tracking-wider text-slate-400 mb-0.5">
                     {item.workflow === "bill" ? t("billSaathi") : t("proofPath")}
                   </span>
-                  <p className="text-sm font-semibold text-white truncate mt-0.5">
+                  <p className="text-base font-bold text-white line-clamp-2 break-words leading-relaxed">
                     {item.summary || item.document_type}
                   </p>
-                  <span className="text-[11px] text-slate-500 font-mono mt-1 block">
-                    {item.created_at ? new Date(item.created_at).toLocaleDateString() : ""}
-                  </span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs text-slate-400 font-mono">
+                      {item.created_at ? new Date(item.created_at).toLocaleDateString() : ""}
+                    </span>
+                    {Boolean(localStorage.getItem(`proofsathi_payment_${item.id}`)) && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-emerald-300 bg-emerald-950/90 px-2 py-0.5 rounded-md border border-emerald-600/70">
+                        ✓ {t("billPaidBanner")}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1 shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => setDeleteTargetId(item.id)}
-                  className="tap-target p-2 text-slate-500 hover:text-rose-400 rounded-xl transition-colors cursor-pointer"
+                  className="tap-target w-11 h-11 text-slate-400 hover:text-rose-400 rounded-xl transition-colors cursor-pointer flex items-center justify-center bg-slate-800/80 border border-slate-700 hover:border-rose-700"
                   aria-label="Delete document"
                 >
                   <Trash2 className="w-5 h-5" />
@@ -147,10 +158,10 @@ export const HistoryPage: React.FC = () => {
                   onClick={() =>
                     navigate(item.workflow === "bill" ? `/billsaathi/${item.id}` : `/proofpath/${item.id}`)
                   }
-                  className="tap-target p-2 text-slate-500 hover:text-white rounded-xl transition-colors cursor-pointer"
+                  className="tap-target w-11 h-11 text-slate-300 hover:text-white rounded-xl transition-colors cursor-pointer flex items-center justify-center bg-slate-800/80 border border-slate-700 hover:border-sky-500"
                   aria-label="View document"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-6 h-6" />
                 </button>
               </div>
             </div>
@@ -160,15 +171,15 @@ export const HistoryPage: React.FC = () => {
 
       {/* Delete Confirmation Modal */}
       {deleteTargetId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
-          <div className="w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 space-y-4 animate-in fade-in duration-150">
-            <div className="w-12 h-12 rounded-2xl bg-rose-950/80 text-rose-400 flex items-center justify-center mx-auto border border-rose-800">
-              <AlertTriangle className="w-6 h-6" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+          <div className="w-full max-w-sm bg-slate-900 border-2 border-slate-700 rounded-3xl p-6 sm:p-7 space-y-4 shadow-2xl animate-in fade-in duration-150">
+            <div className="w-14 h-14 rounded-2xl bg-rose-950 text-rose-400 flex items-center justify-center mx-auto border-2 border-rose-700">
+              <AlertTriangle className="w-7 h-7" />
             </div>
-            <h3 className="text-lg font-bold text-center text-white">
+            <h3 className="text-xl font-black text-center text-white">
               {t("confirmDelete")}
             </h3>
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-3.5 pt-2">
               <BigButton variant="outline" size="md" onClick={() => setDeleteTargetId(null)}>
                 {t("cancel")}
               </BigButton>

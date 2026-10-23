@@ -29,19 +29,19 @@ export const LoadingProgress: React.FC = () => {
 
   return (
     <div
-      className="p-8 sm:p-12 text-center bg-slate-900 border-2 border-indigo-500/40 rounded-3xl space-y-5 animate-pulse-subtle shadow-xl"
+      className="p-8 sm:p-12 text-center bg-slate-900 border-2 border-indigo-500/60 rounded-3xl space-y-6 shadow-2xl"
       aria-live="polite"
       role="status"
     >
-      <div className="w-16 h-16 rounded-2xl bg-indigo-600/30 text-indigo-400 mx-auto flex items-center justify-center border border-indigo-500/40">
-        <Loader2 className="w-9 h-9 animate-spin" />
+      <div className="w-18 h-18 rounded-2xl bg-indigo-600/30 text-indigo-400 mx-auto flex items-center justify-center border-2 border-indigo-500/50 shadow-inner">
+        <Loader2 className="w-10 h-10 animate-spin" />
       </div>
 
-      <div className="space-y-2">
-        <h3 className="text-2xl font-bold text-white tracking-tight">
+      <div className="space-y-2.5">
+        <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug">
           {getStageMessage()}
         </h3>
-        <p className="text-sm text-slate-400 max-w-sm mx-auto">
+        <p className="text-base text-slate-300 font-medium max-w-sm mx-auto leading-relaxed">
           Please keep this window open while we process your document safely.
         </p>
       </div>
@@ -51,8 +51,8 @@ export const LoadingProgress: React.FC = () => {
         {[1, 2, 3].map((step) => (
           <div
             key={step}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              stage >= step ? "w-8 bg-indigo-500" : "w-2.5 bg-slate-700"
+            className={`h-3.5 rounded-full transition-all duration-300 ${
+              stage >= step ? "w-10 bg-indigo-500 border border-indigo-300 shadow-sm" : "w-3.5 bg-slate-700"
             }`}
           />
         ))}

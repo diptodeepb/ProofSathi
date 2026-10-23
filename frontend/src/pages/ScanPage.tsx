@@ -51,24 +51,25 @@ export const ScanPage: React.FC = () => {
       {/* Top bar with back button */}
       <div className="flex items-center justify-between">
         <button
+          type="button"
           onClick={() => navigate(-1)}
-          className="tap-target px-3 py-1.5 text-slate-400 hover:text-white rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+          className="tap-target px-4 py-2 text-slate-300 hover:text-white rounded-2xl flex items-center gap-2 transition-colors cursor-pointer bg-slate-900 border border-slate-800"
         >
-          <ArrowLeft className="w-5 h-5" />
-          <span className="text-sm font-semibold">{t("back")}</span>
+          <ArrowLeft className="w-5 h-5 text-sky-400" />
+          <span className="text-base font-bold">{t("back")}</span>
         </button>
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-950/80 text-indigo-300 border border-indigo-700/60">
-          {workflow === "bill" ? <Receipt className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
-          {workflow === "bill" ? t("billSaathi") : t("proofPath")}
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-indigo-950 text-indigo-300 border-2 border-indigo-700/80 shadow-sm">
+          {workflow === "bill" ? <Receipt className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
+          <span>{workflow === "bill" ? t("billSaathi") : t("proofPath")}</span>
         </span>
       </div>
 
-      <div className="space-y-1">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+      <div className="space-y-1.5">
+        <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
           {workflow === "bill" ? t("understandBill") : t("understandDocument")}
         </h2>
-        <p className="text-sm sm:text-base text-slate-300">
+        <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed">
           {t("scanDocument")}
         </p>
       </div>
@@ -80,15 +81,15 @@ export const ScanPage: React.FC = () => {
           <DocumentCapture onCapture={handleAnalyze} isLoading={isLoading} />
 
           {error && (
-            <div className="p-4 bg-rose-950/70 border border-rose-800 rounded-2xl flex items-start gap-3 text-rose-200">
-              <AlertCircle className="w-6 h-6 shrink-0 mt-0.5" />
-              <div className="space-y-2">
-                <p className="text-sm font-semibold">{error}</p>
+            <div className="p-5 bg-rose-950/80 border-2 border-rose-700 rounded-3xl flex items-start gap-3.5 text-rose-100 shadow-xl">
+              <AlertCircle className="w-7 h-7 text-rose-400 shrink-0 mt-0.5" />
+              <div className="space-y-3">
+                <p className="text-base font-bold leading-relaxed">{error}</p>
                 <BigButton
                   variant="outline"
                   size="md"
                   onClick={() => setError(null)}
-                  className="text-sm py-1.5 px-3 border-rose-700 text-rose-200 hover:bg-rose-900/50"
+                  className="text-base py-2.5 px-5 border-rose-600 text-rose-200 hover:bg-rose-900/50"
                 >
                   {t("retry")}
                 </BigButton>

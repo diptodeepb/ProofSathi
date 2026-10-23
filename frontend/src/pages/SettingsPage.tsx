@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Check,
   AlertTriangle,
-  Info,
 } from "lucide-react";
 
 export const SettingsPage: React.FC = () => {
@@ -37,40 +36,41 @@ export const SettingsPage: React.FC = () => {
     <div className="max-w-xl mx-auto px-4 py-6 space-y-7">
       {/* Title */}
       <div className="space-y-1">
-        <h2 className="text-3xl font-extrabold text-white flex items-center gap-2.5">
+        <h2 className="text-3xl font-extrabold text-white flex items-center gap-3">
           <Settings className="w-8 h-8 text-sky-400" />
-          {t("settingsTitle")}
+          <span>{t("settingsTitle")}</span>
         </h2>
-        <p className="text-sm text-slate-400">
+        <p className="text-base text-slate-300 font-medium">
           Preferences and safety boundaries
         </p>
       </div>
 
-      {/* Language Section */}
-      <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
-        <div className="flex items-center gap-2.5 text-white">
+      {/* Language Section (Elderly friendly large tiles) */}
+      <div className="p-6 sm:p-7 rounded-3xl bg-slate-900 border-2 border-slate-800 space-y-4 shadow-xl">
+        <div className="flex items-center gap-3 text-white">
           <Languages className="w-6 h-6 text-indigo-400" />
-          <h3 className="text-lg font-bold">{t("appLanguageTitle")}</h3>
+          <h3 className="text-xl font-extrabold">{t("appLanguageTitle")}</h3>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {languagesList.map((langItem) => {
             const isSelected = language === langItem.code;
             return (
               <button
                 key={langItem.code}
+                type="button"
                 onClick={() => setLanguage(langItem.code)}
-                className={`tap-target w-full p-4 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                className={`tap-target w-full p-4.5 rounded-2xl border-2 text-left flex items-center justify-between transition-all cursor-pointer shadow-md ${
                   isSelected
-                    ? "bg-indigo-950/80 border-indigo-500 text-white shadow-md shadow-indigo-950/40"
-                    : "bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700"
+                    ? "bg-indigo-950 border-indigo-400 text-white shadow-indigo-950/60"
+                    : "bg-slate-950 border-slate-700 text-slate-200 hover:border-slate-500"
                 }`}
               >
                 <div>
-                  <span className="block text-lg font-bold">{langItem.label}</span>
-                  <span className="block text-xs text-slate-400">{langItem.sub}</span>
+                  <span className="block text-xl font-black">{langItem.label}</span>
+                  <span className="block text-sm text-slate-300 font-medium mt-0.5">{langItem.sub}</span>
                 </div>
-                {isSelected && <Check className="w-6 h-6 text-indigo-400" />}
+                {isSelected && <Check className="w-7 h-7 text-indigo-400 shrink-0 ml-2" />}
               </button>
             );
           })}
@@ -78,12 +78,12 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* Clear Data Section */}
-      <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
-        <div className="flex items-center gap-2.5 text-white">
+      <div className="p-6 sm:p-7 rounded-3xl bg-slate-900 border-2 border-slate-800 space-y-3.5 shadow-xl">
+        <div className="flex items-center gap-3 text-white">
           <Trash2 className="w-6 h-6 text-rose-400" />
-          <h3 className="text-lg font-bold">{t("clearHistoryTitle")}</h3>
+          <h3 className="text-xl font-extrabold">{t("clearHistoryTitle")}</h3>
         </div>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-base text-slate-300 font-medium leading-relaxed">
           {t("clearHistoryDesc")}
         </p>
 
@@ -91,28 +91,28 @@ export const SettingsPage: React.FC = () => {
           variant="outline"
           size="md"
           onClick={() => setShowClearConfirm(true)}
-          className="border-slate-700 text-slate-300 hover:border-rose-600 hover:text-rose-300"
+          className="border-slate-600 text-slate-200 hover:border-rose-500 hover:text-white"
         >
           {t("clearAll")}
         </BigButton>
 
         {clearedMsg && (
-          <p className="text-xs text-emerald-400 font-semibold pt-1">
+          <p className="text-sm text-emerald-400 font-bold pt-1">
             ✓ {clearedMsg}
           </p>
         )}
       </div>
 
-      {/* AI Safety and Clinical/Financial Boundaries */}
-      <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
-        <div className="flex items-center gap-2.5 text-white">
+      {/* AI Safety and Boundaries */}
+      <div className="p-6 sm:p-7 rounded-3xl bg-slate-900 border-2 border-slate-800 space-y-3.5 shadow-xl">
+        <div className="flex items-center gap-3 text-white">
           <ShieldCheck className="w-6 h-6 text-emerald-400" />
-          <h3 className="text-lg font-bold">{t("aiBoundariesTitle")}</h3>
+          <h3 className="text-xl font-extrabold">{t("aiBoundariesTitle")}</h3>
         </div>
-        <p className="text-sm text-slate-300 leading-relaxed">
+        <p className="text-base text-slate-300 font-medium leading-relaxed">
           {t("aiBoundariesDesc")}
         </p>
-        <div className="pt-2 text-xs text-slate-500 space-y-1 font-mono">
+        <div className="pt-2 text-xs sm:text-sm text-slate-400 space-y-1 font-mono">
           <p>Product: ProofSathi v0.1.0</p>
           <p>AI Engine: Gemma 4 26B A4B (Gemini API)</p>
           <p>Voice: ElevenLabs Multilingual TTS</p>
@@ -121,15 +121,15 @@ export const SettingsPage: React.FC = () => {
 
       {/* Confirmation Modal */}
       {showClearConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
-          <div className="w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-6 space-y-4 animate-in fade-in duration-150">
-            <div className="w-12 h-12 rounded-2xl bg-rose-950/80 text-rose-400 flex items-center justify-center mx-auto border border-rose-800">
-              <AlertTriangle className="w-6 h-6" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+          <div className="w-full max-w-sm bg-slate-900 border-2 border-slate-700 rounded-3xl p-6 sm:p-7 space-y-4 shadow-2xl animate-in fade-in duration-150">
+            <div className="w-14 h-14 rounded-2xl bg-rose-950 text-rose-400 flex items-center justify-center mx-auto border-2 border-rose-700">
+              <AlertTriangle className="w-7 h-7" />
             </div>
-            <h3 className="text-lg font-bold text-center text-white">
+            <h3 className="text-xl font-black text-center text-white">
               {t("confirmDelete")}
             </h3>
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-3.5 pt-2">
               <BigButton variant="outline" size="md" onClick={() => setShowClearConfirm(false)}>
                 {t("cancel")}
               </BigButton>

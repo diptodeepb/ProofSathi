@@ -2,13 +2,13 @@
 
 @layer base {
   :root {
-    --bg-base: #030712;
+    --bg-base: #090d16;
     --bg-surface: #0f172a;
     --bg-surface-elevated: #1e293b;
-    --border-subtle: #334155;
-    --border-muted: #475569;
-    --text-high: #f8fafc;
-    --text-medium: #cbd5e1;
+    --border-subtle: #273549;
+    --border-muted: #3d4f68;
+    --text-high: #ffffff;
+    --text-medium: #e2e8f0;
     --text-low: #94a3b8;
     --color-primary: #38bdf8;
     --color-accent: #6366f1;
@@ -23,7 +23,7 @@
     overflow-x: hidden;
     max-width: 100vw;
     width: 100%;
-    font-size: 18px; /* Accessible readable base for older adults */
+    font-size: 18px; /* Accessible base font size for elderly legibility */
   }
 
   body {
@@ -39,7 +39,8 @@
     width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
 
   #root {
@@ -48,13 +49,13 @@
     flex-direction: column;
   }
 
-  /* Accessible focus indicators */
+  /* High contrast accessible focus indicators */
   :focus-visible {
     outline: 3px solid #38bdf8;
     outline-offset: 3px;
   }
 
-  /* Prevent zoom on inputs on iOS while maintaining tap targets */
+  /* Prevent zoom on inputs on iOS while maintaining large touch targets */
   input,
   select,
   textarea,
@@ -64,37 +65,103 @@
   }
 }
 
-/* Accessible Tap Target utility (min 48px) */
+/* Senior-friendly Tap Target utility (min 52px for ease of clicking/tapping) */
 .tap-target {
-  min-height: 48px;
-  min-width: 48px;
+  min-height: 52px;
+  min-width: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Card surfaces */
+/* Accessible card surfaces in rich dark mode */
 .card-surface {
   background-color: #0f172a;
-  border: 1px solid #334155;
-  border-radius: 1rem;
+  border: 1.5px solid #273549;
+  border-radius: 1.25rem;
 }
 
 .card-elevated {
-  background-color: #1e293b;
-  border: 1px solid #475569;
-  border-radius: 1rem;
+  background-color: #162034;
+  border: 1.5px solid #3d4f68;
+  border-radius: 1.25rem;
 }
 
-/* Animations */
+/* Camera viewfinder corner brackets */
+.viewfinder-corner-tl,
+.viewfinder-corner-tr,
+.viewfinder-corner-bl,
+.viewfinder-corner-br {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-color: #38bdf8;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.viewfinder-corner-tl {
+  top: 16px;
+  left: 16px;
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-top-left-radius: 8px;
+}
+
+.viewfinder-corner-tr {
+  top: 16px;
+  right: 16px;
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-top-right-radius: 8px;
+}
+
+.viewfinder-corner-bl {
+  bottom: 16px;
+  left: 16px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-bottom-left-radius: 8px;
+}
+
+.viewfinder-corner-br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Sound wave animations for voice player */
+@keyframes soundwave-1 {
+  0%, 100% { height: 6px; }
+  50% { height: 18px; }
+}
+
+@keyframes soundwave-2 {
+  0%, 100% { height: 16px; }
+  50% { height: 8px; }
+}
+
+@keyframes soundwave-3 {
+  0%, 100% { height: 10px; }
+  50% { height: 20px; }
+}
+
+@keyframes soundwave-4 {
+  0%, 100% { height: 18px; }
+  50% { height: 6px; }
+}
+
+.animate-soundwave-1 { animation: soundwave-1 0.8s ease-in-out infinite; }
+.animate-soundwave-2 { animation: soundwave-2 0.7s ease-in-out infinite; }
+.animate-soundwave-3 { animation: soundwave-3 0.9s ease-in-out infinite; }
+.animate-soundwave-4 { animation: soundwave-4 0.75s ease-in-out infinite; }
+
+/* Subtle pulse */
 @keyframes pulseSubtle {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .animate-pulse-subtle {
