@@ -1,0 +1,358 @@
+export type AppLanguage = "en" | "hi" | "bn";
+
+export const messages = {
+  en: {
+    appName: "ProofSathi",
+    tagline: "Your trusted companion for household bills and official documents",
+    chooseLanguage: "Which language are you most comfortable with?",
+    savePreference: "Continue",
+    languageEnglish: "English",
+    languageHindi: "हिंदी (Hindi)",
+    languageBengali: "বাংলা (Bengali)",
+
+    // Home modules
+    billSaathi: "BillSaathi",
+    proofPath: "ProofPath",
+    understandBill: "Understand a bill",
+    understandBillDesc: "See how much is due, what changed from an earlier bill, and key charges in plain words.",
+    understandDocument: "Understand a document",
+    understandDocumentDesc: "Understand a notice or letter, see important deadlines, required papers, and next steps.",
+    recentDocuments: "Recent Documents",
+    viewAllHistory: "View History",
+
+    // Capture & Preview
+    scanDocument: "Take a photo or choose a file",
+    takePhoto: "Take a Photo",
+    chooseFile: "Choose File from Phone",
+    retake: "Retake Photo",
+    confirmUpload: "Understand This Document",
+    framingGuide: "Tip: Place the document on a flat surface in good light and make sure all four corners are visible.",
+    uploadPrivacy: "Your document is processed securely to explain it. Avoid uploading private documents you do not want processed by an AI service.",
+    captureShutter: "Capture Photo",
+    flipCamera: "Switch Camera",
+    cancelCamera: "Close Camera",
+    cameraPermissionError: "Camera access was denied or unavailable. Please grant camera permission in your browser settings or choose a file from your device.",
+    cameraStarting: "Starting camera...",
+
+    // Audio Controls
+    listen: "Listen to explanation",
+    playing: "Playing explanation...",
+    pause: "Pause audio",
+    resume: "Resume audio",
+    stopAudio: "Stop audio",
+    audioUnavailable: "Spoken audio unavailable. The full written explanation is shown below.",
+
+    // Loading stages
+    loadingChecking: "Checking the photo...",
+    loadingReading: "Reading the document...",
+    loadingExplaining: "Preparing plain-language explanation...",
+
+    // Evidence & Fields
+    evidence: "Found on document",
+    evidenceTooltip: "Exact printed words from the photographed document",
+    statusClear: "Clear on document",
+    statusCheck: "Please verify",
+    statusUnreadable: "Unclear in photo",
+    amountDue: "Total Amount Due",
+    dueDate: "Payment Due Date",
+    billingPeriod: "Billing Period",
+    consumption: "Electricity / Usage",
+    provider: "Utility Provider",
+    consumerId: "Consumer ID",
+    lineItems: "Itemized Charges",
+
+    // Bill Comparison
+    compareWithPrevious: "Compare with an earlier bill",
+    comparingWith: "Comparing with earlier bill",
+    uploadPreviousPrompt: "Photograph or select your earlier bill to see what changed",
+    billComparisonTitle: "Bill Comparison",
+    amountDifference: "Amount Difference",
+    consumptionDifference: "Usage Difference",
+    dueDateComparison: "Due Date Change",
+    comparisonDisclaimer: "These figures show what changed between bills. A difference does not automatically mean an overcharge or error.",
+    increased: "Increased",
+    decreased: "Decreased",
+    unchanged: "Same as before",
+
+    // ProofPath
+    documentSummary: "Document Summary",
+    importantDates: "Important Dates & Deadlines",
+    requiredDocuments: "Documents You May Need",
+    actionChecklist: "Action Checklist",
+    markCompleted: "Mark as Done",
+    markPending: "Mark as To-Do",
+    statusPending: "To-Do",
+    statusCompleted: "Completed",
+    statusNeedsConfirmation: "Needs Confirmation",
+    addTask: "Add a reminder or step",
+    taskPlaceholder: "What do you need to do?",
+
+    // Navigation & Common
+    home: "Home",
+    history: "Saved Records",
+    settings: "Settings",
+    back: "Back",
+    retry: "Try again",
+    cancel: "Cancel",
+    delete: "Delete",
+    confirmDelete: "Are you sure you want to delete this record from your phone?",
+    recordDeleted: "Record deleted successfully.",
+    noRecords: "No saved documents yet. Tap Home to understand your first bill or notice.",
+    demoSpecimens: "Or try with a sample document",
+    demoTag: "Sample specimen",
+    close: "Close",
+    savedToHistory: "Saved to your records",
+    filterAll: "All",
+    filterBills: "Bills only",
+    filterDocuments: "Notices only",
+
+    // Settings
+    settingsTitle: "Settings & Privacy",
+    appLanguageTitle: "App Language",
+    clearHistoryTitle: "Clear Saved Documents",
+    clearHistoryDesc: "Deletes all saved analysis records from this device.",
+    clearAll: "Clear All History",
+    allHistoryCleared: "All saved records cleared.",
+    aiBoundariesTitle: "Safety & Boundaries",
+    aiBoundariesDesc: "ProofSathi is an accessibility reading assistant. It does not pay bills, submit official forms, provide legal/medical advice, or authenticate documents. Consequential instructions should be confirmed directly with the issuing office.",
+  },
+
+  hi: {
+    appName: "प्रूफसाथी",
+    tagline: "घरेलू बिलों और आधिकारिक दस्तावेज़ों को समझने का आपका सरल साथी",
+    chooseLanguage: "आप किस भाषा में सबसे सहज हैं?",
+    savePreference: "आगे बढ़ें",
+    languageEnglish: "English",
+    languageHindi: "हिंदी (Hindi)",
+    languageBengali: "বাংলা (Bengali)",
+
+    // Home modules
+    billSaathi: "बिलसाथी",
+    proofPath: "प्रूफपाथ",
+    understandBill: "बिल समझें",
+    understandBillDesc: "जानें कितना भुगतान करना है, पिछले बिल से क्या बदला, और बिल की मुख्य दरें सरल शब्दों में।",
+    understandDocument: "दस्तावेज़ समझें",
+    understandDocumentDesc: "नोटिस या पत्र को समझें, ज़रूरी तारीखें, लगने वाले कागज़ात और आगे क्या करना है जानें।",
+    recentDocuments: "हाल के दस्तावेज़",
+    viewAllHistory: "इतिहास देखें",
+
+    // Capture & Preview
+    scanDocument: "फ़ोटो लें या फ़ाइल चुनें",
+    takePhoto: "फ़ोटो खींचें",
+    chooseFile: "फ़ोन से फ़ाइल चुनें",
+    retake: "फिर से फ़ोटो लें",
+    confirmUpload: "दस्तावेज़ समझें",
+    framingGuide: "सुझाव: दस्तावेज़ को समतल सतह पर रखें, अच्छी रोशनी में फ़ोटो लें और चारों कोने साफ़ दिखने दें।",
+    uploadPrivacy: "आपके दस्तावेज़ को समझाने के लिए संसाधित किया जाएगा। ऐसे दस्तावेज़ अपलोड न करें जिन्हें आप AI सेवा से संसाधित नहीं करवाना चाहते।",
+    captureShutter: "फ़ोटो खींचें",
+    flipCamera: "कैमरा बदलें",
+    cancelCamera: "कैमरा बंद करें",
+    cameraPermissionError: "कैमरा अनुमति अस्वीकृत या अनुपलब्ध है। कृपया ब्राउज़र सेटिंग में अनुमति दें या फ़ोन से फ़ाइल चुनें।",
+    cameraStarting: "कैमरा शुरू हो रहा है...",
+
+    // Audio Controls
+    listen: "विवरण सुनें",
+    playing: "ऑडियो चल रहा है...",
+    pause: "ऑडियो रोकें",
+    resume: "ऑडियो फिर चालू करें",
+    stopAudio: "ऑडियो बंद करें",
+    audioUnavailable: "ऑडियो उपलब्ध नहीं है। पूरा लिखित विवरण नीचे दिया गया है।",
+
+    // Loading stages
+    loadingChecking: "फ़ोटो की जांच हो रही है...",
+    loadingReading: "दस्तावेज़ पढ़ा जा रहा है...",
+    loadingExplaining: "सरल भाषा में विवरण तैयार हो रहा है...",
+
+    // Evidence & Fields
+    evidence: "दस्तावेज़ पर पाया गया",
+    evidenceTooltip: "फ़ोटो में छपा हुआ मूल पाठ",
+    statusClear: "दस्तावेज़ पर स्पष्ट",
+    statusCheck: "जांच की आवश्यकता",
+    statusUnreadable: "फ़ोटो में अस्पष्ट",
+    amountDue: "कुल देय राशि",
+    dueDate: "भुगतान की अंतिम तारीख",
+    billingPeriod: "बिलिंग अवधि",
+    consumption: "बिजली खपत (यूनिट)",
+    provider: "सेवा प्रदाता",
+    consumerId: "उपभोक्ता संख्या",
+    lineItems: "बिल का विवरण",
+
+    // Bill Comparison
+    compareWithPrevious: "पिछले बिल से तुलना करें",
+    comparingWith: "पिछले बिल से तुलना",
+    uploadPreviousPrompt: "क्या बदलाव हुआ यह देखने के लिए अपना पिछला बिल चुनें या फ़ोटो लें",
+    billComparisonTitle: "बिलों की तुलना",
+    amountDifference: "राशि में अंतर",
+    consumptionDifference: "खपत में अंतर",
+    dueDateComparison: "अंतिम तारीख में बदलाव",
+    comparisonDisclaimer: "यह आंकड़े दिखाते हैं कि बिल में क्या बदलाव हुआ है। किसी अंतर का स्वतः यह अर्थ नहीं है कि अधिक शुल्क लिया गया है।",
+    increased: "बढ़ा है",
+    decreased: "घटा है",
+    unchanged: "पहले जैसा",
+
+    // ProofPath
+    documentSummary: "दस्तावेज़ का सार",
+    importantDates: "महत्वपूर्ण तिथियां व समय सीमा",
+    requiredDocuments: "ज़रूरी दस्तावेज़",
+    actionChecklist: "आवश्यक कार्य सूची",
+    markCompleted: "पूर्ण चिह्नित करें",
+    markPending: "करना बाकी है",
+    statusPending: "बाकी है",
+    statusCompleted: "पूर्ण",
+    statusNeedsConfirmation: "पुष्टि आवश्यक",
+    addTask: "एक नया कार्य जोड़ें",
+    taskPlaceholder: "आपको क्या करना है?",
+
+    // Navigation & Common
+    home: "होम",
+    history: "सहेजे गए दस्तावेज़",
+    settings: "सेटिंग्स",
+    back: "वापस",
+    retry: "फिर कोशिश करें",
+    cancel: "रद्द करें",
+    delete: "हटाएं",
+    confirmDelete: "क्या आप वाकई इस दस्तावेज़ को अपने फ़ोन से हटाना चाहते हैं?",
+    recordDeleted: "दस्तावेज़ सफलतापूर्वक हटा दिया गया।",
+    noRecords: "अभी कोई सहेजा गया दस्तावेज़ नहीं है। पहला बिल या नोटिस समझने के लिए होम पर जाएं।",
+    demoSpecimens: "या नमूना दस्तावेज़ से आज़माएं",
+    demoTag: "नमूना दस्तावेज़",
+    close: "बंद करें",
+    savedToHistory: "आपके रिकॉर्ड में सहेज लिया गया",
+    filterAll: "सभी",
+    filterBills: "केवल बिल",
+    filterDocuments: "केवल नोटिस",
+
+    // Settings
+    settingsTitle: "सेटिंग्स व गोपनीयता",
+    appLanguageTitle: "ऐप की भाषा",
+    clearHistoryTitle: "सहेजा गया इतिहास साफ़ करें",
+    clearHistoryDesc: "इस उपकरण से सभी सहेजे गए दस्तावेज़ हटा देगा।",
+    clearAll: "सारा इतिहास हटाएं",
+    allHistoryCleared: "सभी रिकॉर्ड साफ़ कर दिए गए।",
+    aiBoundariesTitle: "सुरक्षा व सीमाएं",
+    aiBoundariesDesc: "प्रूफसाथी दस्तावेज़ पढ़ने में सहायता प्रदान करता है। यह बिल का भुगतान नहीं करता, सरकारी फॉर्म जमा नहीं करता और न ही कानूनी/चिकित्सीय सलाह देता है। किसी भी महत्वपूर्ण निर्देश की पुष्टि संबंधित कार्यालय से अवश्य करें।",
+  },
+
+  bn: {
+    appName: "প্রুফসাথী",
+    tagline: "ঘরের বিল ও দরকারি সরকারি চিঠি বোঝার আপনার বিশ্বস্ত সাথী",
+    chooseLanguage: "আপনি কোন ভাষায় সবচেয়ে স্বচ্ছন্দ?",
+    savePreference: "এগিয়ে যান",
+    languageEnglish: "English",
+    languageHindi: "हिंदी (Hindi)",
+    languageBengali: "বাংলা (Bengali)",
+
+    // Home modules
+    billSaathi: "বিলসাথী",
+    proofPath: "প্রুফপাথ",
+    understandBill: "বিল বুঝুন",
+    understandBillDesc: "কত টাকা দিতে হবে, আগের বিল থেকে কী পরিবর্তন হয়েছে, এবং মূল চার্জগুলি সহজ বাংলায় জানুন।",
+    understandDocument: "নথি বুঝুন",
+    understandDocumentDesc: "চিঠি বা নোটিশের মর্মার্থ বুঝুন, জমা দেওয়ার শেষ তারিখ, প্রয়োজনীয় কাগজ ও করণীয় পদক্ষেপ জানুন।",
+    recentDocuments: "সাম্প্রতিক নথি",
+    viewAllHistory: "ইতিহাস দেখুন",
+
+    // Capture & Preview
+    scanDocument: "ছবি তুলুন বা ফাইল বেছে নিন",
+    takePhoto: "ছবি তুলুন",
+    chooseFile: "ফোন থেকে ফাইল বেছে নিন",
+    retake: "আবার ছবি তুলুন",
+    confirmUpload: "নথিটি বুঝুন",
+    framingGuide: "পরামর্শ: নথিটি একটি সমতল জায়গায় রাখুন, আলো ঠিক রাখুন এবং চারটি কোণ যাতে পরিষ্কার দেখা যায় তা নিশ্চিত করুন।",
+    uploadPrivacy: "আপনার নথিটি বোঝানোর জন্য প্রক্রিয়া করা হবে। যে নথি আপনি AI পরিষেবায় প্রক্রিয়া করাতে চান না, তা আপলোড করবেন না।",
+    captureShutter: "ছবি তুলুন",
+    flipCamera: "ক্যামেরা পরিবর্তন",
+    cancelCamera: "ক্যামেরা বন্ধ করুন",
+    cameraPermissionError: "ক্যামেরা ব্যবহারের অনুমতি বাতিল বা অনুপলব্ধ। অনুগ্রহ করে ব্রাউজারে অনুমতি দিন বা ফাইল নির্বাচন করুন।",
+    cameraStarting: "ক্যামেরা চালু হচ্ছে...",
+
+    // Audio Controls
+    listen: "কথা শুনুন",
+    playing: "অডিও চলছে...",
+    pause: "অডিও থামান",
+    resume: "অডিও চালু করুন",
+    stopAudio: "অডিও বন্ধ করুন",
+    audioUnavailable: "অডিও পাওয়া যাচ্ছে না। সম্পূর্ণ লিখিত ব্যাখ্যা নিচে দেওয়া হয়েছে।",
+
+    // Loading stages
+    loadingChecking: "ছবি পরীক্ষা করা হচ্ছে...",
+    loadingReading: "নথি পড়া হচ্ছে...",
+    loadingExplaining: "সহজ ভাষায় বিবরণ তৈরি করা হচ্ছে...",
+
+    // Evidence & Fields
+    evidence: "নথিতে যা পাওয়া গেছে",
+    evidenceTooltip: "তোলা ছবি থেকে পাওয়া মূল লেখা",
+    statusClear: "নথিতে পরিষ্কার",
+    statusCheck: "যাচাই প্রয়োজন",
+    statusUnreadable: "ছবিতে অস্পষ্ট",
+    amountDue: "মোট প্রদেয় টাকা",
+    dueDate: "টাকা জমা দেওয়ার শেষ তারিখ",
+    billingPeriod: "বিলের সময়কাল",
+    consumption: "বিদ্যুৎ খরচ (ইউনিট)",
+    provider: "বিদ্যুৎ সরবরাহকারী",
+    consumerId: "গ্রাহক নম্বর",
+    lineItems: "বিলের বিস্তারিত হিসাব",
+
+    // Bill Comparison
+    compareWithPrevious: "আগের বিলের সাথে তুলনা করুন",
+    comparingWith: "আগের বিলের সাথে তুলনা",
+    uploadPreviousPrompt: "কী পরিবর্তন হয়েছে দেখতে আগের বিলের ছবি তুলুন বা বেছে নিন",
+    billComparisonTitle: "বিলের তুলনা",
+    amountDifference: "টাকার পরিমাণের পার্থক্য",
+    consumptionDifference: "ইউনিট ব্যবহারের পার্থক্য",
+    dueDateComparison: "শেষ তারিখের পরিবর্তন",
+    comparisonDisclaimer: "এই হিসাব বিলের পরিবর্তন নির্দেশ করে। পার্থক্যের অর্থ এই নয় যে আপনাকে ভুল বা বেশি চার্জ করা হয়েছে।",
+    increased: "বেড়েছে",
+    decreased: "কমেছে",
+    unchanged: "একই আছে",
+
+    // ProofPath
+    documentSummary: "নথির সারসংক্ষেপ",
+    importantDates: "গুরুত্বপূর্ণ তারিখ ও সময়সীমা",
+    requiredDocuments: "প্রয়োজনীয় কাগজপত্র",
+    actionChecklist: "করণীয় কাজের তালিকা",
+    markCompleted: "সম্পন্ন চিহ্নিত করুন",
+    markPending: "বাকি আছে",
+    statusPending: "বাকি আছে",
+    statusCompleted: "সম্পন্ন",
+    statusNeedsConfirmation: "যাচাই আবশ্যক",
+    addTask: "একটি নতুন কাজ যোগ করুন",
+    taskPlaceholder: "আপনার কী করণীয়?",
+
+    // Navigation & Common
+    home: "হোম",
+    history: "সংরক্ষিত নথি",
+    settings: "সেটিংস",
+    back: "ফিরে যান",
+    retry: "আবার চেষ্টা করুন",
+    cancel: "বাতিল",
+    delete: "মুছে ফেলুন",
+    confirmDelete: "আপনি কি নিশ্চিত যে এই নথির তথ্য ফোন থেকে মুছে ফেলতে চান?",
+    recordDeleted: "নথিটি সফলভাবে মুছে ফেলা হয়েছে।",
+    noRecords: "এখনও কোনও সংরক্ষিত নথি নেই। নতুন বিল বা নোটিশ বুঝতে হোমে যান।",
+    demoSpecimens: "অথবা একটি নমুনা নথি দিয়ে দেখুন",
+    demoTag: "নমুনা নথি",
+    close: "বন্ধ করুন",
+    savedToHistory: "আপনার রেকর্ডে সংরক্ষিত হয়েছে",
+    filterAll: "সব",
+    filterBills: "শুধু বিল",
+    filterDocuments: "শুধু নোটিশ",
+
+    // Settings
+    settingsTitle: "সেটিংস ও গোপনীয়তা",
+    appLanguageTitle: "অ্যাপের ভাষা",
+    clearHistoryTitle: "সংরক্ষিত নথি মুছে ফেলুন",
+    clearHistoryDesc: "এই ফোন থেকে সমস্ত সংরক্ষিত তথ্য মুছে ফেলা হবে।",
+    clearAll: "সব ইতিহাস মুছে ফেলুন",
+    allHistoryCleared: "সমস্ত সংরক্ষিত নথি মুছে ফেলা হয়েছে।",
+    aiBoundariesTitle: "নিরাপত্তা ও নীতিমালা",
+    aiBoundariesDesc: "প্রুফসাথী নথি পড়ার ক্ষেত্রে সহায়তাকারী। এটি নিজে থেকে বিল প্রদান করে না, কোনো সরকারি ফর্ম জমা দেয় না বা কোনো আইনি/চিকিৎসা পরামর্শ দেয় না। গুরুত্বপূর্ণ নির্দেশাবলী সরাসরি সংশ্লিষ্ট প্রতিষ্ঠানের সাথে যাচাই করুন।",
+  },
+} as const;
+
+export type TranslationKey = keyof typeof messages.en;
+
+export function getMessage(lang: AppLanguage, key: TranslationKey): string {
+  const dict = messages[lang] || messages.en;
+  return dict[key] || messages.en[key] || String(key);
+}

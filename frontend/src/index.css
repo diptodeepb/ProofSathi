@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #030712;
+    --bg-surface: #0f172a;
+    --bg-surface-elevated: #1e293b;
+    --border-subtle: #334155;
+    --border-muted: #475569;
+    --text-high: #f8fafc;
+    --text-medium: #cbd5e1;
+    --text-low: #94a3b8;
+    --color-primary: #38bdf8;
+    --color-accent: #6366f1;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #f43f5e;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    font-size: 18px; /* Accessible readable base for older adults */
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-high);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 3px solid #38bdf8;
+    outline-offset: 3px;
+  }
+
+  /* Prevent zoom on inputs on iOS while maintaining tap targets */
+  input,
+  select,
+  textarea,
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}
+
+/* Accessible Tap Target utility (min 48px) */
+.tap-target {
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card surfaces */
+.card-surface {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 1rem;
+}
+
+.card-elevated {
+  background-color: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 1rem;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
