@@ -20,6 +20,7 @@ from app.api.bills import router as bills_router
 from app.api.actions import router as actions_router
 from app.api.speech import router as speech_router
 from app.api.fixtures import router as fixtures_router
+from app.api.payments import router as payments_router
 
 logging.basicConfig(level=getattr(logging, settings.log_level.upper(), logging.INFO))
 logger = logging.getLogger("proofsathi")
@@ -116,3 +117,4 @@ app.include_router(bills_router, prefix=api_prefix)
 app.include_router(actions_router, prefix=api_prefix)
 app.include_router(speech_router, prefix=api_prefix)
 app.include_router(fixtures_router, prefix=api_prefix)
+app.include_router(payments_router, prefix=api_prefix)

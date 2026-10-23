@@ -208,7 +208,7 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
       {/* 1. Live Camera / Viewfinder Mode */}
       {isCameraActive ? (
         <div className="space-y-4 animate-in fade-in duration-200">
-          <div className="relative rounded-3xl overflow-hidden border-2 border-sky-500 bg-black aspect-[3/4] max-h-[520px] flex items-center justify-center shadow-2xl">
+          <div className="relative rounded-3xl overflow-hidden border-3 border-sky-400 bg-black aspect-[3/4] max-h-[520px] flex items-center justify-center shadow-2xl">
             <video
               ref={videoRef}
               autoPlay
@@ -224,32 +224,32 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
             <div className="viewfinder-corner-br" />
 
             {/* Framing Guide Header Overlay */}
-            <div className="absolute top-4 left-4 right-4 bg-slate-950/75 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center pointer-events-none">
-              <span className="text-xs text-sky-300 font-semibold tracking-wide">
+            <div className="absolute top-4 left-4 right-4 bg-slate-950/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border-2 border-slate-700 text-center pointer-events-none shadow-lg">
+              <span className="text-sm text-sky-300 font-bold tracking-wide">
                 Align document corners inside the frame
               </span>
             </div>
 
             {/* Camera Floating Controls: Flip Camera & Cancel */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+            <div className="absolute top-4 right-4 flex items-center gap-2.5 z-10">
               <button
                 type="button"
                 onClick={handleToggleCamera}
-                className="tap-target w-11 h-11 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 shadow-md backdrop-blur-md active:scale-95 transition-transform"
+                className="tap-target w-12 h-12 rounded-full bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-slate-600 shadow-lg backdrop-blur-md active:scale-95 transition-transform"
                 title={t("flipCamera")}
                 aria-label={t("flipCamera")}
               >
-                <SwitchCamera className="w-5 h-5" />
+                <SwitchCamera className="w-6 h-6 text-sky-400" />
               </button>
 
               <button
                 type="button"
                 onClick={handleCloseCamera}
-                className="tap-target w-11 h-11 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 shadow-md backdrop-blur-md active:scale-95 transition-transform"
+                className="tap-target w-12 h-12 rounded-full bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-slate-600 shadow-lg backdrop-blur-md active:scale-95 transition-transform"
                 title={t("cancelCamera")}
                 aria-label={t("cancelCamera")}
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6 text-slate-300" />
               </button>
             </div>
 
@@ -258,11 +258,11 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
               <button
                 type="button"
                 onClick={handleCaptureFrame}
-                className="w-20 h-20 rounded-full bg-white/20 p-1.5 backdrop-blur-md border-2 border-white/50 active:scale-90 transition-transform shadow-2xl flex items-center justify-center group cursor-pointer"
+                className="w-22 h-22 rounded-full bg-white/25 p-2 backdrop-blur-md border-3 border-white/70 active:scale-90 transition-transform shadow-2xl flex items-center justify-center group cursor-pointer"
                 aria-label={t("captureShutter")}
               >
                 <div className="w-full h-full rounded-full bg-white group-hover:bg-slate-100 flex items-center justify-center shadow-inner">
-                  <Camera className="w-7 h-7 text-indigo-900" />
+                  <Camera className="w-8 h-8 text-indigo-950" />
                 </div>
               </button>
             </div>
@@ -272,7 +272,7 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
             <button
               type="button"
               onClick={handleCloseCamera}
-              className="text-sm font-semibold text-slate-400 hover:text-white py-2 tap-target"
+              className="text-base font-bold text-slate-300 hover:text-white py-2 tap-target underline cursor-pointer"
             >
               {t("cancelCamera")}
             </button>
@@ -282,17 +282,17 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
         /* 2. Standby / Framing Guidance Mode */
         <div className="space-y-4">
           {/* Framing Guide Box */}
-          <div className="border-2 border-dashed border-sky-500/50 bg-sky-950/20 rounded-3xl p-6 text-center relative overflow-hidden">
+          <div className="border-2 border-dashed border-sky-500/60 bg-slate-900/90 rounded-3xl p-6 sm:p-7 text-center relative overflow-hidden shadow-lg">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center border border-sky-500/30">
-                <Camera className="w-8 h-8" />
+              <div className="w-18 h-18 rounded-2xl bg-sky-500/20 text-sky-300 flex items-center justify-center border-2 border-sky-500/40">
+                <Camera className="w-9 h-9" />
               </div>
             </div>
 
-            <p className="text-base sm:text-lg font-medium text-slate-200 mb-2">
+            <p className="text-lg sm:text-xl font-bold text-white mb-2 leading-relaxed">
               {t("framingGuide")}
             </p>
-            <span className="text-xs text-sky-300 font-mono block">
+            <span className="text-sm text-sky-300 font-medium block">
               Supported formats: Live Camera, JPG, PNG, WebP (Max 8 MB)
             </span>
           </div>
@@ -326,15 +326,15 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
           </div>
 
           {/* Privacy Note */}
-          <div className="flex items-start gap-3 p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs text-slate-400">
-            <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3.5 p-4.5 bg-slate-900 border-2 border-slate-800 rounded-2xl text-sm text-slate-300 font-medium">
+            <ShieldAlert className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
             <p className="leading-relaxed">{t("uploadPrivacy")}</p>
           </div>
         </div>
       ) : (
         /* 3. Preview & Confirmation State */
         <div className="space-y-4 animate-in fade-in duration-200">
-          <div className="relative rounded-3xl overflow-hidden border-2 border-indigo-500/60 bg-black max-h-[460px] flex items-center justify-center shadow-xl">
+          <div className="relative rounded-3xl overflow-hidden border-2 border-indigo-500 bg-black max-h-[460px] flex items-center justify-center shadow-2xl">
             <img
               src={previewUrl}
               alt="Document preview"
@@ -367,14 +367,14 @@ export const DocumentCapture: React.FC<DocumentCaptureProps> = ({ onCapture, isL
       )}
 
       {errorMsg && (
-        <div className="mt-4 p-4 bg-rose-950/60 border border-rose-800/60 text-rose-200 rounded-2xl text-sm font-medium flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+        <div className="mt-4 p-4.5 bg-rose-950/80 border-2 border-rose-700 text-rose-100 rounded-2xl text-base font-semibold flex items-start gap-3.5 shadow-lg">
+          <AlertCircle className="w-6 h-6 text-rose-400 shrink-0 mt-0.5" />
           <div className="space-y-2">
             <p>{errorMsg}</p>
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="text-xs text-sky-400 underline font-semibold cursor-pointer"
+              className="text-sm text-sky-300 hover:text-white underline font-bold cursor-pointer"
             >
               {t("chooseFile")} instead
             </button>

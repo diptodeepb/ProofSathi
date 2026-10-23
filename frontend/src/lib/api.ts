@@ -114,6 +114,37 @@ export interface DocumentListItem {
   warnings: string[];
 }
 
+export interface PaymentReceipt {
+  payment_id: string;
+  transaction_id: string;
+  biller_reference: string;
+  document_id: string;
+  amount: number;
+  currency: string;
+  biller_name: string;
+  consumer_id: string;
+  consumer_name: string;
+  payment_method: string;
+  status: string;
+  paid_at: string;
+  due_date?: string | null;
+  period_or_description?: string | null;
+  gateway_note?: string;
+}
+
+export interface SimulatePaymentPayload {
+  document_id: string;
+  amount: number;
+  currency?: string;
+  biller_name: string;
+  consumer_id: string;
+  consumer_name?: string;
+  payment_method: string;
+  due_date?: string | null;
+  period_or_description?: string | null;
+  breakdown_items?: Array<{ label: string; amount: number; formatted_amount?: string }>;
+}
+
 async function request(path: string, options: RequestInit = {}): Promise<any> {
   const sid = getSessionId();
   const headers = new Headers(options.headers || {});
@@ -253,5 +284,36 @@ export const api = {
     const res = await fetch(`${API_BASE}/demo/fixtures/${fixtureId}/image`);
     if (!res.ok) throw new Error("Could not load fixture image.");
     return res.blob();
+  },
+
+  async simulatePayment(payload: SimulatePaymentPayload): Promise<PaymentReceipt> {
+    const receipt = await request("/payments/simulate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    try {
+      localStorage.setItem(`proofsathi_payment_${payload.document_id}`, JSON.stringify(receipt));
+    } catch {}
+    return receipt;
+  },
+
+  async getPaymentReceipt(documentId: string): Promise<PaymentReceipt | null> {
+    try {
+      const res = await request(`/payments/${documentId}`);
+      if (res && res.payment_id) {
+        try {
+          localStorage.setItem(`proofsathi_payment_${documentId}`, JSON.stringify(res));
+        } catch {}
+        return res;
+      }
+    } catch {}
+    const cached = localStorage.getItem(`proofsathi_payment_${documentId}`);
+    if (cached) {
+      try {
+        return JSON.parse(cached);
+      } catch {}
+    }
+    return null;
   },
 };
